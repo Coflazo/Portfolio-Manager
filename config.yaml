@@ -1,0 +1,91 @@
+name: Portfolio Council
+data_dir: data
+initial_capital_eur: '100'
+models:
+  - id: nvidia/nemotron-3-ultra-550b-a55b:free
+    role: Quantitative risk analyst
+  - id: google/gemma-4-31b-it:free
+    role: Macroeconomic analyst
+  - id: inclusionai/ling-3.0-flash-fin:free
+    role: Fundamental and news analyst
+  - id: qwen/qwen3.8-27b:free
+    role: Independent skeptical reviewer
+  - id: poolside/laguna-s-2.1:free
+    role: Strategy and mathematical reviewer
+risk:
+  max_position_weight: '0.20'
+  max_crypto_weight: '0.50'
+  min_cash_weight: '0.10'
+  buy_halt_loss: '0.20'
+  target_trade_weight: '0.10'
+  max_price_drift: '0.01'
+  max_spread: '0.01'
+  max_cost_fraction: '0.01'
+  equity_quote_ttl_seconds: 120
+  crypto_quote_ttl_seconds: 15
+  proposal_ttl_seconds: 900
+  max_buy_councils_per_day: 2
+quota:
+  openrouter_per_day: 50
+  openrouter_per_minute: 20
+  reserve_for_sells: 20
+  tavily_per_month: 1000
+  twelvedata_per_day: 800
+  twelvedata_per_minute: 8
+scan_interval_seconds: 900
+reconcile_interval_seconds: 30
+rss_feeds:
+  - https://www.federalreserve.gov/feeds/press_all.xml
+  - https://www.ecb.europa.eu/rss/press.html
+# This is a small initial research universe, not an investment recommendation.
+# Live eligibility and the broker's instrument metadata are checked before trading.
+instruments:
+  - id: AAPL
+    name: Apple
+    broker: trading212
+    broker_symbol: AAPL_US_EQ
+    data_symbol: AAPL
+    asset_class: stock
+    currency: USD
+    calendar: XNYS
+    quantity_step: '0.00000001'
+    min_quantity: '0.00000001'
+    min_notional: '1'
+    fee_bps: '20'
+  - id: MSFT
+    name: Microsoft
+    broker: trading212
+    broker_symbol: MSFT_US_EQ
+    data_symbol: MSFT
+    asset_class: stock
+    currency: USD
+    calendar: XNYS
+    quantity_step: '0.00000001'
+    min_quantity: '0.00000001'
+    min_notional: '1'
+    fee_bps: '20'
+  - id: BTC-EUR
+    name: Bitcoin
+    broker: kraken
+    broker_symbol: XBTEUR
+    price_step: '0.1'
+    data_symbol: BTC/EUR
+    balance_asset: XXBT
+    asset_class: crypto
+    currency: EUR
+    quantity_step: '0.00000001'
+    min_quantity: '0.00005'
+    min_notional: '0.45'
+    fee_bps: '40'
+  - id: ETH-EUR
+    name: Ethereum
+    broker: kraken
+    broker_symbol: ETHEUR
+    data_symbol: ETH/EUR
+    balance_asset: XETH
+    asset_class: crypto
+    currency: EUR
+    quantity_step: '0.00000001'
+    min_quantity: '0.002'
+    min_notional: '0.45'
+    fee_bps: '40'
